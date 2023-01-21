@@ -32,12 +32,8 @@ export default function Home() {
       <Flex justify="center">
         <Divider />
       </Flex>
-      <Flex justify="center" mx={30}>
-        <Card>
-          <CardHeader>
-          
-          </CardHeader>
-        </Card>
+      <Flex justify="center" mx={30} mt={10}>
+        
       </Flex>
     </Box>
   );
