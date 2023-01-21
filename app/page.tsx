@@ -4,80 +4,262 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "./page.module.css";
 import {
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  TableContainer,
+  Text,
   Divider,
   Heading,
-  Box,
   Card,
   CardHeader,
   CardBody,
+  SimpleGrid,
+  Tag,
+  TagLabel,
+  Stack,
+  Box,
   Flex,
-  Spacer,
-  Grid,
-  GridItem,
 } from "@chakra-ui/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <Card>
-        <CardHeader>
-          <Heading as="h2" size="xl">
-            Tasks
-          </Heading>
-        </CardHeader>
-        <Divider orientation="horizontal" />
-        <CardBody>
-          <Box>
-            <TableContainer>
-              <Table variant="simple">
-                <TableCaption>These are your tasks</TableCaption>
-                <Thead>
-                  <Tr>
-                    <Th>To convert</Th>
-                    <Th>into</Th>
-                    <Th isNumeric>multiply by</Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  <Tr>
-                    <Td>inches</Td>
-                    <Td>millimetres (mm)</Td>
-                    <Td isNumeric>25.4</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>feet</Td>
-                    <Td>centimetres (cm)</Td>
-                    <Td isNumeric>30.48</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>yards</Td>
-                    <Td>metres (m)</Td>
-                    <Td isNumeric>0.91444</Td>
-                  </Tr>
-                </Tbody>
-                <Tfoot>
-                  <Tr>
-                    <Th>To convert</Th>
-                    <Th>into</Th>
-                    <Th isNumeric>multiply by</Th>
-                  </Tr>
-                </Tfoot>
-              </Table>
-            </TableContainer>
-          </Box>
-        </CardBody>
-      </Card>
-    </main>
+    <Box>
+      <Flex justify="center" mt={30} mx={30}>
+        <Heading as="h3">To-Do List</Heading>
+      </Flex>
+      <Flex justify="center" mx={30} mb={20}>
+        <Text fontSize="2xl">In love with React & Next</Text>
+      </Flex>
+      <Flex justify="center">
+        <Divider />
+      </Flex>
+      <Flex justify="center" mx={30}>
+        <Card>
+          <CardHeader>
+          
+          </CardHeader>
+        </Card>
+      </Flex>
+    </Box>
   );
 }
+
+// export default function Home() {
+//   return (
+//     <SimpleGrid columns={2} spacing={20}>
+//         <Card m={50}>
+//           <CardHeader>
+//             <Heading as="h2" size="xl">
+//               Tasks
+//             </Heading>
+//           </CardHeader>
+//           <Divider orientation="horizontal" />
+//           <CardBody>
+//             <TableContainer>
+//               <Table variant="simple">
+//                 <Thead>
+//                   <Tr>
+//                     <Th>Name</Th>
+//                     <Th>Date</Th>
+//                     <Th>Status</Th>
+//                   </Tr>
+//                 </Thead>
+//                 <Tbody>
+//                   <Tr>
+//                     <Td>yards</Td>
+//                     <Td>metres (m)</Td>
+//                     <Td>
+//                       <Tag
+//                         size="md"
+//                         borderRadius="full"
+//                         variant="solid"
+//                         colorScheme="yellow"
+//                       >
+//                         <TagLabel>In Progress</TagLabel>
+//                       </Tag>
+//                     </Td>
+//                   </Tr>
+//                   <Tr>
+//                     <Td>yards</Td>
+//                     <Td>metres (m)</Td>
+//                     <Td>
+//                       <Tag
+//                         size="md"
+//                         borderRadius="full"
+//                         variant="solid"
+//                         colorScheme="yellow"
+//                       >
+//                         <TagLabel>In Progress</TagLabel>
+//                       </Tag>
+//                     </Td>
+//                   </Tr>
+//                   <Tr>
+//                     <Td>yards</Td>
+//                     <Td>metres (m)</Td>
+//                     <Td>
+//                       <Tag
+//                         size="md"
+//                         borderRadius="full"
+//                         variant="solid"
+//                         colorScheme="yellow"
+//                       >
+//                         <TagLabel>In Progress</TagLabel>
+//                       </Tag>
+//                     </Td>
+//                   </Tr>
+//                   <Tr>
+//                     <Td>yards</Td>
+//                     <Td>metres (m)</Td>
+//                     <Td>
+//                       <Tag
+//                         size="md"
+//                         borderRadius="full"
+//                         variant="solid"
+//                         colorScheme="yellow"
+//                       >
+//                         <TagLabel>In Progress</TagLabel>
+//                       </Tag>
+//                     </Td>
+//                   </Tr>
+//                   <Tr>
+//                     <Td>yards</Td>
+//                     <Td>metres (m)</Td>
+//                     <Td>
+//                       <Tag
+//                         size="md"
+//                         borderRadius="full"
+//                         variant="solid"
+//                         colorScheme="yellow"
+//                       >
+//                         <TagLabel>In Progress</TagLabel>
+//                       </Tag>
+//                     </Td>
+//                   </Tr>
+//                   <Tr>
+//                     <Td>yards</Td>
+//                     <Td>metres (m)</Td>
+//                     <Td>
+//                       <Tag
+//                         size="md"
+//                         borderRadius="full"
+//                         variant="solid"
+//                         colorScheme="yellow"
+//                       >
+//                         <TagLabel>In Progress</TagLabel>
+//                       </Tag>
+//                     </Td>
+//                   </Tr>
+//                 </Tbody>
+//               </Table>
+//             </TableContainer>
+//           </CardBody>
+//         </Card>
+//         <Card m={50}>
+//           <CardHeader>
+//             <Heading as="h2" size="xl">
+//               Tasks
+//             </Heading>
+//           </CardHeader>
+//           <Divider orientation="horizontal" />
+//           <CardBody>
+//             <TableContainer>
+//               <Table variant="simple">
+//                 <Thead>
+//                   <Tr>
+//                     <Th>Name</Th>
+//                     <Th>Date</Th>
+//                     <Th>Status</Th>
+//                   </Tr>
+//                 </Thead>
+//                 <Tbody>
+//                   <Tr>
+//                     <Td>yards</Td>
+//                     <Td>metres (m)</Td>
+//                     <Td>
+//                       <Tag
+//                         size="md"
+//                         borderRadius="full"
+//                         variant="solid"
+//                         colorScheme="yellow"
+//                       >
+//                         <TagLabel>In Progress</TagLabel>
+//                       </Tag>
+//                     </Td>
+//                   </Tr>
+//                   <Tr>
+//                     <Td>yards</Td>
+//                     <Td>metres (m)</Td>
+//                     <Td>
+//                       <Tag
+//                         size="md"
+//                         borderRadius="full"
+//                         variant="solid"
+//                         colorScheme="yellow"
+//                       >
+//                         <TagLabel>In Progress</TagLabel>
+//                       </Tag>
+//                     </Td>
+//                   </Tr>
+//                   <Tr>
+//                     <Td>yards</Td>
+//                     <Td>metres (m)</Td>
+//                     <Td>
+//                       <Tag
+//                         size="md"
+//                         borderRadius="full"
+//                         variant="solid"
+//                         colorScheme="yellow"
+//                       >
+//                         <TagLabel>In Progress</TagLabel>
+//                       </Tag>
+//                     </Td>
+//                   </Tr>
+//                   <Tr>
+//                     <Td>yards</Td>
+//                     <Td>metres (m)</Td>
+//                     <Td>
+//                       <Tag
+//                         size="md"
+//                         borderRadius="full"
+//                         variant="solid"
+//                         colorScheme="yellow"
+//                       >
+//                         <TagLabel>In Progress</TagLabel>
+//                       </Tag>
+//                     </Td>
+//                   </Tr>
+//                   <Tr>
+//                     <Td>yards</Td>
+//                     <Td>metres (m)</Td>
+//                     <Td>
+//                       <Tag
+//                         size="md"
+//                         borderRadius="full"
+//                         variant="solid"
+//                         colorScheme="yellow"
+//                       >
+//                         <TagLabel>In Progress</TagLabel>
+//                       </Tag>
+//                     </Td>
+//                   </Tr>
+//                   <Tr>
+//                     <Td>yards</Td>
+//                     <Td>metres (m)</Td>
+//                     <Td>
+//                       <Tag
+//                         size="md"
+//                         borderRadius="full"
+//                         variant="solid"
+//                         colorScheme="yellow"
+//                       >
+//                         <TagLabel>In Progress</TagLabel>
+//                       </Tag>
+//                     </Td>
+//                   </Tr>
+//                 </Tbody>
+//               </Table>
+//             </TableContainer>
+//           </CardBody>
+//         </Card>
+//     </SimpleGrid>
+//   );
+// }
