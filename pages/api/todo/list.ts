@@ -2,7 +2,7 @@ import { v4 as uuidv4} from "uuid";
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 
-interface Todo {
+export interface Todo {
     id: string;
     name: string;
     isDone: boolean;

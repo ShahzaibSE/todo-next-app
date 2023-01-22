@@ -1,5 +1,6 @@
 "use client";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "./page.module.css";
@@ -7,33 +8,34 @@ import {
   Text,
   Divider,
   Heading,
-  Card,
-  CardHeader,
-  CardBody,
-  SimpleGrid,
-  Tag,
-  TagLabel,
-  Stack,
   Box,
   Flex,
 } from "@chakra-ui/react";
+// Components.
+import AddToDo from "./addToDo";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function App() {
+  //
   return (
     <Box>
       <Flex justify="center" mt={30} mx={30}>
         <Heading as="h3">To-Do List</Heading>
       </Flex>
       <Flex justify="center" mx={30} mb={20}>
-        <Text fontSize="2xl">In love with React & Next</Text>
+        <Text fontSize="2xl" textAlign="center">
+          Manage your tasks efficiently
+        </Text>
       </Flex>
       <Flex justify="center">
         <Divider />
       </Flex>
       <Flex justify="center" mx={30} mt={10}>
-        
+        <AddToDo/>
+      </Flex>
+      <Flex justify="center" mx={30} mt={20}>
+       
       </Flex>
     </Box>
   );
