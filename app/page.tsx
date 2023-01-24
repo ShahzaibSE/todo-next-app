@@ -19,7 +19,7 @@ export default function App() {
         <Heading as="h3">To-Do List</Heading>
       </Flex>
       <Flex justify="center" mx={30} mb={20}>
-        <Text fontSize="2xl" textAlign="center">
+        <Text fontSize="3xl" textColor="grey" textAlign="center">
           Manage your tasks efficiently
         </Text>
       </Flex>
