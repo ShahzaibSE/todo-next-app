@@ -27,7 +27,7 @@ export default function AddToDo() {
   return (
     <HStack>
       <Box maxWidth="100%">
-        <FormControl maxWidth="100%" isRequired>
+        <FormControl w="md" maxWidth="100%" isRequired>
           <Input placeholder="Enter Your Task" />
         </FormControl>
       </Box>
