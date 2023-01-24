@@ -25,7 +25,7 @@ import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { getToDos } from "./todo.controller";
 import { Todo } from "../pages/api/todo/list";
 
-export default async function toDoList() {
+export default function ToDoList() {
   // let todos: Array<Todo> = await getToDos();
   let todos: Array<Todo> = [
     {
@@ -42,17 +42,17 @@ export default async function toDoList() {
   return (
     <List spacing={3}>
       <ListItem>
-        <Card>
-          <CardBody>
-            {todos.map((item) => {
-              return (
+        {todos.map((item) => {
+          return (
+            <Card key={item.id} mt={5}>
+              <CardBody>
                 <HStack spacing={10} key={item.id}>
-                  <Box>
+                  <Box maxWidth={200}>
                     <Text fontSize="md" as="p">
                       {item.name}
                     </Text>
                   </Box>
-                  <Box>
+                  <Box maxWidth={150}>
                     {item.isDone ? (
                       <Tag size="md" colorScheme="green">
                         <TagLabel>Done</TagLabel>
@@ -63,17 +63,17 @@ export default async function toDoList() {
                       </Tag>
                     )}
                   </Box>
-                  <Box>
+                  <Box maxWidth={70}>
                     <DeleteIcon />
                   </Box>
-                  <Box>
+                  <Box maxWidth={70}>
                     <EditIcon />
                   </Box>
                 </HStack>
-              );
-            })}
-          </CardBody>
-        </Card>
+              </CardBody>
+            </Card>
+          );
+        })}
       </ListItem>
     </List>
   );

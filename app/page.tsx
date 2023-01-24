@@ -4,15 +4,10 @@ import axios from "axios";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "./page.module.css";
-import {
-  Text,
-  Divider,
-  Heading,
-  Box,
-  Flex,
-} from "@chakra-ui/react";
+import { Text, Divider, Heading, Box, Flex, Card, CardBody } from "@chakra-ui/react";
 // Components.
 import AddToDo from "./addToDo";
+import ToDoList from "./toDoList";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,10 +27,14 @@ export default function App() {
         <Divider />
       </Flex>
       <Flex justify="center" mx={30} mt={10}>
-        <AddToDo/>
+        <AddToDo />
       </Flex>
-      <Flex justify="center" mx={30} mt={20}>
-       
+      <Flex justify="center" mx={30} mt={10}>
+        <Card>
+          <CardBody>
+            <ToDoList />
+          </CardBody>
+        </Card>
       </Flex>
     </Box>
   );
