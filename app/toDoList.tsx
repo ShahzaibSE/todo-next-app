@@ -22,10 +22,11 @@ import {
 } from "@chakra-ui/react";
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 // API Handlers.
-import { getToDos } from "./todo";
+import { getToDos } from "./todo.controller";
 import { Todo } from "../pages/api/todo/list";
 
 export default async function toDoList() {
+  // let todos: Array<Todo> = await getToDos();
   let todos: Array<Todo> = [
     {
       id: "1",
