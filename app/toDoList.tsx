@@ -47,12 +47,12 @@ export default function ToDoList() {
             <Card key={item.id} mt={5}>
               <CardBody>
                 <HStack spacing={10} key={item.id}>
-                  <Box maxWidth={200}>
-                    <Text fontSize="md" as="p">
+                  <Flex maxWidth={200} justify="center" alignItems="center">
+                    <Text fontSize="md" as="b">
                       {item.name}
                     </Text>
-                  </Box>
-                  <Box maxWidth={150}>
+                  </Flex>
+                  <Flex maxWidth={150} justify="center" alignItems="center">
                     {item.isDone ? (
                       <Tag size="md" colorScheme="green">
                         <TagLabel>Done</TagLabel>
@@ -62,13 +62,13 @@ export default function ToDoList() {
                         <TagLabel>In Progress</TagLabel>
                       </Tag>
                     )}
-                  </Box>
-                  <Box maxWidth={70}>
-                    <DeleteIcon />
-                  </Box>
-                  <Box maxWidth={70}>
-                    <EditIcon />
-                  </Box>
+                  </Flex>
+                  <Flex maxWidth={70} justify="center" alignItems="center">
+                    <IconButton aria-label="delete" colorScheme="red" icon={<DeleteIcon />}/>
+                  </Flex>
+                  <Flex maxWidth={70} justify="center" alignItems="center">
+                    <IconButton aria-label="edit" colorScheme="yellow" icon={<EditIcon />} />
+                  </Flex>
                 </HStack>
               </CardBody>
             </Card>
