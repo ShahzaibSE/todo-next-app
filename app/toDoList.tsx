@@ -24,6 +24,7 @@ import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 // API Handlers.
 import { getToDos } from "./todo.controller";
 import { Todo } from "../pages/api/todo/list";
+import ToDoContainer from "./todo";
 
 export default function ToDoList() {
   // let todos: Array<Todo> = await getToDos();
@@ -41,40 +42,13 @@ export default function ToDoList() {
   ];
   return (
     <List spacing={3}>
-      <ListItem>
-        {todos.map((item) => {
-          return (
-            <Card key={item.id} mt={5}>
-              <CardBody>
-                <HStack spacing={10} key={item.id}>
-                  <Flex maxWidth={200} justify="center" alignItems="center">
-                    <Text fontSize="md" as="b">
-                      {item.name}
-                    </Text>
-                  </Flex>
-                  <Flex maxWidth={150} justify="center" alignItems="center">
-                    {item.isDone ? (
-                      <Tag size="md" colorScheme="green">
-                        <TagLabel>Done</TagLabel>
-                      </Tag>
-                    ) : (
-                      <Tag size="md" colorScheme="yellow">
-                        <TagLabel>In Progress</TagLabel>
-                      </Tag>
-                    )}
-                  </Flex>
-                  <Flex maxWidth={70} justify="center" alignItems="center">
-                    <IconButton aria-label="delete" colorScheme="red" icon={<DeleteIcon />}/>
-                  </Flex>
-                  <Flex maxWidth={70} justify="center" alignItems="center">
-                    <IconButton aria-label="edit" colorScheme="yellow" icon={<EditIcon />} />
-                  </Flex>
-                </HStack>
-              </CardBody>
-            </Card>
-          );
-        })}
-      </ListItem>
+      {todos.map((item) => {
+        return (
+          <ListItem key={item.id}>
+            <ToDoContainer todo={item} key={item.id}/>
+          </ListItem>
+        );
+      })}
     </List>
   );
 }
