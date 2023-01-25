@@ -3,26 +3,20 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import {
   Text,
-  Divider,
-  Heading,
   Card,
-  CardHeader,
   CardBody,
-  SimpleGrid,
   Tag,
   TagLabel,
-  Stack,
-  Box,
   Flex,
   IconButton,
   HStack,
-  List,
-  ListItem,
+  Checkbox,
+  CheckboxGroup,
 } from "@chakra-ui/react";
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { Todo } from "../pages/api/todo/list";
 
-export default function ToDoContainer({todo}: Todo | any) {
+export default function ToDoContainer({ todo }: Todo | any) {
   const router = useRouter();
   return (
     <Card key={todo.id} mt={5}>
