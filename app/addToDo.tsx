@@ -28,7 +28,7 @@ export default function AddToDo() {
           icon={<AddIcon />}
           colorScheme="green"
           onClick={async () => {
-            await add_to_do(name, router.refresh());
+            await add_to_do(name, router.refresh);
             console.log("Adding to do")
             setName("");
           }}

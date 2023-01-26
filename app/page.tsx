@@ -1,5 +1,5 @@
-"use client";
-import { useState, useEffect } from "react";
+// "use client";
+// import { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
@@ -19,7 +19,7 @@ export default function App() {
         <Heading as="h3">To-Do List</Heading>
       </Flex>
       <Flex justify="center" mx={30} mb={20}>
-        <Text fontSize="3xl" textColor="grey" textAlign="center">
+        <Text fontSize="xl" textColor="grey" textAlign="center">
           Manage your tasks efficiently
         </Text>
       </Flex>

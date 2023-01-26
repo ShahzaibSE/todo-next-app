@@ -1,7 +1,7 @@
-"use client";
+// "use client";
 
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Text,
   Divider,
@@ -22,30 +22,35 @@ import {
 } from "@chakra-ui/react";
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 // API Handlers.
-import { getToDos } from "./todo.controller";
+// import { getTodos } from "./todo.controller";
 import { Todo } from "../pages/api/todo/list";
 import ToDoContainer from "./todo";
 
-export default function ToDoList() {
-  // let todos: Array<Todo> = await getToDos();
-  let todos: Array<Todo> = [
-    {
-      id: "1",
-      name: "Get grocery from market",
-      isDone: false,
-    },
-    {
-      id: "2",
-      name: "Get grocery from imtiaz",
-      isDone: false,
-    },
-  ];
+export const getTodos = async () => {
+  let todos = await fetch("http://localhost:3001/api/todo/list");
+  return todos.json();
+};
+
+export default async function ToDoList() {
+  const {todos} = await getTodos();
+  // let todos: Array<Todo> = [
+  //   {
+  //     id: "1",
+  //     name: "Get grocery from market",
+  //     isDone: false,
+  //   },
+  //   {
+  //     id: "2",
+  //     name: "Get grocery from imtiaz",
+  //     isDone: false,
+  //   },
+  // ];
   return (
     <List spacing={3}>
-      {todos.map((item) => {
+      {todos.map((item: any) => {
         return (
           <ListItem key={item.id}>
-            <ToDoContainer todo={item} key={item.id}/>
+            <ToDoContainer todo={item} key={item.id} />
           </ListItem>
         );
       })}

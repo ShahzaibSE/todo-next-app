@@ -15,7 +15,25 @@ import {
 } from "@chakra-ui/react";
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { Todo } from "../pages/api/todo/list";
-import { update_to_do, delete_to_do } from "./todo.controller";
+// import { update_to_do, delete_to_do } from "./todo.controller";
+import { baseUrl } from "./todo.controller";
+
+export async function update_to_do(id:any, isDone: any, refresh: any) {
+  await fetch(`${baseUrl}/api/todo/update`, {
+    method: "POST",
+    body: JSON.stringify({ id, isDone }),
+  });
+
+  refresh();
+}
+
+export async function delete_to_do(id: any, refresh: any) {
+  await fetch(`${baseUrl}/delete?id=${id}`, {
+    method: "DELETE",
+  });
+
+  refresh();
+}
 
 export default function ToDoContainer({ todo }: Todo | any) {
   const router = useRouter();
@@ -47,7 +65,8 @@ export default function ToDoContainer({ todo }: Todo | any) {
               colorScheme="red"
               icon={<DeleteIcon />}
               onClick={(e: any) => {
-                delete_to_do(todo.id, router.refresh());
+                console.log("Deleting todo");
+                delete_to_do(todo.id, router.refresh);
               }}
             />
           </Flex>
@@ -57,7 +76,7 @@ export default function ToDoContainer({ todo }: Todo | any) {
               colorScheme="yellow"
               icon={<EditIcon />}
               onClick={(e: any) => {
-                update_to_do(todo.id, e.target.value, router.refresh());
+                update_to_do(todo.id, e.target.value, router.refresh);
               }}
             />
           </Flex>
