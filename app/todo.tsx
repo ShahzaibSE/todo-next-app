@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { Todo } from "../pages/api/todo/list";
+import { update_to_do, delete_to_do } from "./todo.controller";
 
 export default function ToDoContainer({ todo }: Todo | any) {
   const router = useRouter();
@@ -22,10 +23,12 @@ export default function ToDoContainer({ todo }: Todo | any) {
     <Card key={todo.id} mt={5}>
       <CardBody>
         <HStack spacing={10} key={todo.id}>
-          <Flex maxWidth={200} justify="center" alignItems="center">
-            <Text fontSize="md" as="b">
-              {todo.name}
-            </Text>
+          <Flex maxWidth={300} justify="center" alignItems="center">
+            <Checkbox colorScheme="green">
+              <Text fontSize="md" as="b">
+                {todo.name}
+              </Text>
+            </Checkbox>
           </Flex>
           <Flex maxWidth={150} justify="center" alignItems="center">
             {todo.isDone ? (
@@ -43,6 +46,9 @@ export default function ToDoContainer({ todo }: Todo | any) {
               aria-label="delete"
               colorScheme="red"
               icon={<DeleteIcon />}
+              onClick={(e: any) => {
+                delete_to_do(todo.id, router.refresh());
+              }}
             />
           </Flex>
           <Flex maxWidth={70} justify="center" alignItems="center">
@@ -50,6 +56,9 @@ export default function ToDoContainer({ todo }: Todo | any) {
               aria-label="edit"
               colorScheme="yellow"
               icon={<EditIcon />}
+              onClick={(e: any) => {
+                update_to_do(todo.id, e.target.value, router.refresh());
+              }}
             />
           </Flex>
         </HStack>
