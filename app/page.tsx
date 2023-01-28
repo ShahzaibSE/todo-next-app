@@ -81,7 +81,37 @@ function ToDoContainer({ todo }: Todo | any) {
   );
 }
 
-function createToDo() {}
+function CreateToDo({ addToDo }: any) {
+  const [name, setName] = useState(" ");
+  //
+  const handleSubmit = (e: any) => {
+    try {
+      e.preventDefault();
+      addToDo(name);
+      setName("");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  //
+  return (
+    <HStack>
+      <Box maxWidth="100%">
+        <FormControl w="md" maxWidth="100%" isRequired>
+          <Input placeholder="Enter Your Task" value={name} onChange={(e:any) => setName(e.target.value)} />
+        </FormControl>
+      </Box>
+      <Box>
+        <IconButton
+          aria-label="Add Task"
+          icon={<AddIcon />}
+          colorScheme="green"
+          onClick={handleSubmit}
+        />
+      </Box>
+    </HStack>
+  );
+}
 
 export default function App() {
   const [todos, setTodos] = useState<Array<Todo>>([
@@ -105,6 +135,17 @@ export default function App() {
     },
   ]);
   //
+  const addToDo = (todo_title: string) => {
+    let newToDo = {
+      id: uuidv4(),
+      name: todo_title,
+      isDone: false,
+      createdAt: new Date().toISOString(),
+    };
+    let newToDos = [...todos, newToDo];
+    setTodos(newToDos);
+  };
+  //
   return (
     <Box>
       <Flex justify="center" mt={30} mx={30}>
@@ -120,6 +161,7 @@ export default function App() {
       </Flex>
       <Flex justify="center" mx={30} mt={10}>
         {/* <AddToDo /> */}
+        <CreateToDo addToDo={addToDo}/>
       </Flex>
       <Flex justify="center" mx={30} mt={10}>
         <Card>
