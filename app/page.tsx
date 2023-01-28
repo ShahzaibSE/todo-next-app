@@ -98,7 +98,11 @@ function CreateToDo({ addToDo }: any) {
     <HStack>
       <Box maxWidth="100%">
         <FormControl w="md" maxWidth="100%" isRequired>
-          <Input placeholder="Enter Your Task" value={name} onChange={(e:any) => setName(e.target.value)} />
+          <Input
+            placeholder="Enter Your Task"
+            value={name}
+            onChange={(e: any) => setName(e.target.value)}
+          />
         </FormControl>
       </Box>
       <Box>
@@ -114,7 +118,7 @@ function CreateToDo({ addToDo }: any) {
 }
 
 export default function App() {
-  const [todos, setTodos] = useState<Array<Todo>>([
+  const [todos, setToDos] = useState<Array<Todo>>([
     {
       id: uuidv4(),
       name: "Buy 1 KG potatoes",
@@ -143,7 +147,33 @@ export default function App() {
       createdAt: new Date().toISOString(),
     };
     let newToDos = [...todos, newToDo];
-    setTodos(newToDos);
+    setToDos(newToDos);
+  };
+  //
+  const updateToDo = ({ id, isDone }: any) => {
+    let newToDos: Array<Todo | any> = [];
+    todos.map((obj) => {
+      let newToDo = { ...obj };
+      if (obj.id == id) {
+        newToDo = {
+          id,
+          name: obj.name,
+          isDone,
+        };
+      }
+      newToDos.push(newToDo);
+      setToDos(newToDos);
+    });
+  };
+  //
+  const deleteToDo = (index: number) => {
+    try {
+      let newToDos = [...todos];
+      newToDos.splice(index, 1);
+      setToDos(newToDos);
+    } catch (err) {
+      console.error(err);
+    }
   };
   //
   return (
@@ -161,7 +191,7 @@ export default function App() {
       </Flex>
       <Flex justify="center" mx={30} mt={10}>
         {/* <AddToDo /> */}
-        <CreateToDo addToDo={addToDo}/>
+        <CreateToDo addToDo={addToDo} />
       </Flex>
       <Flex justify="center" mx={30} mt={10}>
         <Card>
@@ -172,7 +202,13 @@ export default function App() {
                 ? todos.map((todo: Todo, index: number) => {
                     return (
                       <ListItem key={index}>
-                        <ToDoContainer todo={todo} index={index} key={index} />
+                        <ToDoContainer
+                          todo={todo}
+                          index={index}
+                          key={index}
+                          updateToDo={updateToDo}
+                          deleteToDo={deleteToDo}
+                        />
                       </ListItem>
                     );
                   })
