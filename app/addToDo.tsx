@@ -8,7 +8,7 @@ import axios from "axios";
 // import { add_to_do } from "./todo.controller";
 
 export async function add_to_do(name: string, refresh: any) {
-  await axios.post(`http://localhost:3001/api/todo/add`);
+  await axios.post(`http://localhost:3000/api/todo/add`);
   refresh();
 }
 

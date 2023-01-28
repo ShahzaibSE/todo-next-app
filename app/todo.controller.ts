@@ -2,10 +2,10 @@ import axios from "axios";
 import { ACTION_REFRESH } from "next/dist/client/components/reducer";
 import listTodo, { Todo, todos } from "../pages/api/todo/list";
 
-export const baseUrl = "http://localhost:3001/api/todo";
+export const baseUrl = "http://localhost:3000/api/todo";
 
 export const getTodos = async () => {
-  let todos = await fetch("http://localhost:3001/api/todo/list");
+  let todos = await fetch("http://localhost:3000/api/todo/list");
   return todos.json();
 };
 
