@@ -28,11 +28,11 @@ import { v4 as uuidv4 } from "uuid";
 // Components.
 import AddToDo from "./addToDo";
 import ToDoList from "./toDoList";
-import { Todo } from "../pages/api/todo/list";
+import { deleteTodo, Todo, updateTodo } from "../pages/api/todo/list";
 
 const inter = Inter({ subsets: ["latin"] });
 
-function ToDoContainer({ todo }: Todo | any) {
+function ToDoContainer({ todo, index, updateToDo, deleteToDo }: Todo | any) {
   return (
     <Card key={todo.id} mt={5}>
       <CardBody>
@@ -60,9 +60,7 @@ function ToDoContainer({ todo }: Todo | any) {
               aria-label="delete"
               colorScheme="red"
               icon={<DeleteIcon />}
-              onClick={(e: any) => {
-                console.log("Deleting todo");
-              }}
+              onClick={deleteToDo}
             />
           </Flex>
           <Flex maxWidth={70} justify="center" alignItems="center">
@@ -70,9 +68,7 @@ function ToDoContainer({ todo }: Todo | any) {
               aria-label="edit"
               colorScheme="yellow"
               icon={<EditIcon />}
-              onClick={(e: any) => {
-                console.log("Update todo");
-              }}
+              onClick={updateToDo}
             />
           </Flex>
         </HStack>
@@ -138,6 +134,7 @@ export default function App() {
       createdAt: new Date().toISOString(),
     },
   ]);
+  // const [todos, setToDos] = useState([]);
   //
   const addToDo = (todo_title: string) => {
     let newToDo = {
