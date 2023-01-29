@@ -38,11 +38,11 @@ function ToDoContainer({ todo, index, updateToDo, deleteToDo }: Todo | any) {
       <CardBody>
         <HStack spacing={10} key={todo.id}>
           <Flex maxWidth={300} justify="center" alignItems="center">
-            <Checkbox colorScheme="green">
+            {/* <Checkbox colorScheme="green"> */}
               <Text fontSize="md" as="b">
                 {todo.name}
               </Text>
-            </Checkbox>
+            {/* </Checkbox> */}
           </Flex>
           <Flex maxWidth={150} justify="center" alignItems="center">
             {todo.isDone ? (
@@ -68,7 +68,7 @@ function ToDoContainer({ todo, index, updateToDo, deleteToDo }: Todo | any) {
               aria-label="edit"
               colorScheme="yellow"
               icon={<EditIcon />}
-              onClick={updateToDo}
+              onClick={()=>updateToDo(index)}
             />
           </Flex>
         </HStack>
@@ -147,20 +147,14 @@ export default function App() {
     setToDos(newToDos);
   };
   //
-  const updateToDo = ({ id, isDone }: any) => {
-    let newToDos: Array<Todo | any> = [];
-    todos.map((obj) => {
-      let newToDo = { ...obj };
-      if (obj.id == id) {
-        newToDo = {
-          id,
-          name: obj.name,
-          isDone,
-        };
-      }
-      newToDos.push(newToDo);
+  const updateToDo = (index: any) => {
+    try{
+      const newToDos: Array<Todo> = [...todos];
+      newToDos[index].isDone = !newToDos[index].isDone;
       setToDos(newToDos);
-    });
+    }catch(err){
+      console.error(err);
+    }
   };
   //
   const deleteToDo = (index: number) => {
