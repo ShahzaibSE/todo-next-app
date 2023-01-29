@@ -1,7 +1,5 @@
 "use client";
 import { useState } from "react";
-import axios from "axios";
-import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "./page.module.css";
 import {
@@ -21,13 +19,15 @@ import {
   Checkbox,
   Tag,
   TagLabel,
-  Progress,
+  useToast,
+  Alert,
+  AlertTitle,
+  AlertIcon,
+  AlertDescription,
 } from "@chakra-ui/react";
 import { AddIcon, EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { v4 as uuidv4 } from "uuid";
 // Components.
-import AddToDo from "./addToDo";
-import ToDoList from "./toDoList";
 import { deleteTodo, Todo, updateTodo } from "../pages/api/todo/list";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -39,9 +39,9 @@ function ToDoContainer({ todo, index, updateToDo, deleteToDo }: Todo | any) {
         <HStack spacing={10} key={todo.id}>
           <Flex maxWidth={300} justify="center" alignItems="center">
             {/* <Checkbox colorScheme="green"> */}
-              <Text fontSize="md" as="b">
-                {todo.name}
-              </Text>
+            <Text fontSize="md" as="b">
+              {todo.name}
+            </Text>
             {/* </Checkbox> */}
           </Flex>
           <Flex maxWidth={150} justify="center" alignItems="center">
@@ -68,7 +68,7 @@ function ToDoContainer({ todo, index, updateToDo, deleteToDo }: Todo | any) {
               aria-label="edit"
               colorScheme="yellow"
               icon={<EditIcon />}
-              onClick={()=>updateToDo(index)}
+              onClick={() => updateToDo(index)}
             />
           </Flex>
         </HStack>
@@ -114,6 +114,7 @@ function CreateToDo({ addToDo }: any) {
 }
 
 export default function App() {
+  const toast = useToast();
   const [todos, setToDos] = useState<Array<Todo>>([
     {
       id: uuidv4(),
@@ -137,22 +138,38 @@ export default function App() {
   // const [todos, setToDos] = useState([]);
   //
   const addToDo = (todo_title: string) => {
-    let newToDo = {
-      id: uuidv4(),
-      name: todo_title,
-      isDone: false,
-      createdAt: new Date().toISOString(),
-    };
-    let newToDos = [...todos, newToDo];
-    setToDos(newToDos);
+    try {
+      let newToDo = {
+        id: uuidv4(),
+        name: todo_title,
+        isDone: false,
+        createdAt: new Date().toISOString(),
+      };
+      let newToDos = [...todos, newToDo];
+      setToDos(newToDos);
+      toast({
+        title: "Successfully created a task",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
   //
   const updateToDo = (index: any) => {
-    try{
+    try {
       const newToDos: Array<Todo> = [...todos];
       newToDos[index].isDone = !newToDos[index].isDone;
       setToDos(newToDos);
-    }catch(err){
+      toast({
+        title: "Successfully updated task",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+    } catch (err) {
       console.error(err);
     }
   };
@@ -162,6 +179,12 @@ export default function App() {
       let newToDos = [...todos];
       newToDos.splice(index, 1);
       setToDos(newToDos);
+      toast({
+        title: "Successfully deleted task",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
     } catch (err) {
       console.error(err);
     }
@@ -185,28 +208,48 @@ export default function App() {
         <CreateToDo addToDo={addToDo} />
       </Flex>
       <Flex justify="center" mx={30} mt={10}>
-        <Card>
-          {/* <CardBody><ToDoList /></CardBody> */}
-          <CardBody>
-            <List spacing={3}>
-              {todos.length > 0
-                ? todos.map((todo: Todo, index: number) => {
-                    return (
-                      <ListItem key={index}>
-                        <ToDoContainer
-                          todo={todo}
-                          index={index}
-                          key={index}
-                          updateToDo={updateToDo}
-                          deleteToDo={deleteToDo}
-                        />
-                      </ListItem>
-                    );
-                  })
-                : null}
-            </List>
-          </CardBody>
-        </Card>
+        {todos.length > 0 ? (
+          <Card>
+            {/* <CardBody><ToDoList /></CardBody> */}
+            <CardBody>
+              <List spacing={3}>
+                {todos.map((todo: Todo, index: number) => {
+                  return (
+                    <ListItem key={index}>
+                      <ToDoContainer
+                        todo={todo}
+                        index={index}
+                        key={index}
+                        updateToDo={updateToDo}
+                        deleteToDo={deleteToDo}
+                      />
+                    </ListItem>
+                  );
+                })}
+              </List>
+            </CardBody>
+          </Card>
+        ) : (
+          <Flex justify="center" mx={30} mt={10}>
+            <Alert
+              status="info"
+              variant="subtle"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              textAlign="center"
+              height="200px"
+            >
+              <AlertIcon boxSize="40px" mr={0} />
+              <AlertTitle mt={4} mb={1} fontSize="lg">
+                There are no tasks!
+              </AlertTitle>
+              <AlertDescription maxWidth="sm">
+                Thanks for using our application! Let us make your day mangeable
+              </AlertDescription>
+            </Alert>
+          </Flex>
+        )}
       </Flex>
     </Box>
   );
